@@ -1,80 +1,73 @@
 <template>
   <div class="city">
-    <div class="Hotcity">
-      <h2 class="HotCity">热门城市</h2>
-      <div class="HotcityList">
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-        <div class="HotcityItem">上海</div>
-      </div>
-    </div>
-
-    <div class="cityList">
-      <div class="cityListItem">
-        <h2 class="cityItemTitle">A</h2>
-        <div class="cityItemList">
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
-          <div class="cityItemIndex">上海</div>
+    <BScroll ref="bscroll">
+      <div>
+        <div class="Hotcity">
+          <h2 class="HotCityTitle" ref="HotCityTitle">热门城市</h2>
+          <div class="HotcityList">
+            <div class="HotcityItem" v-for="(item, index) in HotCity">
+              {{ item.nm }}
+            </div>
+          </div>
+        </div>
+        <div class="cityList" ref="cityList">
+          <div class="cityListItem" v-for="(item, index) in CityList">
+            <h2 class="cityItemTitle">{{ item.index }}</h2>
+            <div class="cityItemList">
+              <div
+                class="cityItemIndex"
+                v-for="(cityItem, cityIndex) in item.list"
+              >
+                {{ cityItem.nm }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </BScroll>
+    <div class="CityIndex">
+      <ul>
+        <span @touchstart="handleHot">热门</span>
+        <li v-for="(item, index) in CityList" @touchstart="handleToCity(index)">
+          {{ item.index }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
+import Vuex from "vuex";
 export default {
   name: "city",
+  created() {
+    this.getCityList();
+  },
+  computed: {
+    ...Vuex.mapState({
+      HotCity: (state) => state.City.HotCity,
+      CityList: (state) => state.City.CityList,
+    }),
+  },
+  methods: {
+    ...Vuex.mapActions({
+      getCityList: "City/getActionsCityList",
+    }),
+    handleToCity(index) {
+      var to = this.$refs.cityList.getElementsByTagName("h2")[index].offsetTop;
+      this.$refs.bscroll.handleTo(to);
+    },
+    handleHot() {
+      var Hot = this.$refs.HotCityTitle.offsetTop;
+      this.$refs.bscroll.handleHot(Hot);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .city {
   height: 100%;
   background: #ebebeb;
-  .HotCity,
+  .HotCityTitle,
   .cityItemTitle {
     padding-left: 0.4rem;
     font-size: 0.4rem;
@@ -111,6 +104,22 @@ export default {
       line-height: 1.3rem;
       font-size: 0.4rem;
       color: #333;
+    }
+  }
+  .CityIndex {
+    position: fixed;
+    right: 0.05rem;
+    top: 3rem;
+    text-align: center;
+    z-index: 6;
+    li {
+      width: 1rem;
+      padding: 5px;
+      padding-left: 0.6rem;
+    }
+    span {
+      padding: 5px;
+      padding-left: 0.25rem;
     }
   }
 }

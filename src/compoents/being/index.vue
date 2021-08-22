@@ -1,24 +1,26 @@
 <template>
-  <div class="movieList">
-    <div class="movieItem" v-for="(item, index) in MovieList">
-      <div class="moviePic"><img :src="item.img" /></div>
-      <div class="movieDes">
-        <div class="movieInfo">
-          <h2>{{ item.nm }}</h2>
-          <p>
-            观众评:<span class="movieSc">{{ item.sc }}</span>
-          </p>
-          <p class="star">
-            主演:<span>{{ item.star }}</span>
-          </p>
-          <p>{{ item.showInfo }}</p>
-        </div>
-        <div :class="item.globalReleased ? 'movieBtn' : 'movieBtnTo'">
-          {{ item.globalReleased ? "购票" : "预售" }}
+  <BScroll ref="BeingWrapper">
+    <div class="movieList">
+      <div class="movieItem" v-for="(item, index) in MovieList">
+        <div class="moviePic"><img :src="item.img" /></div>
+        <div class="movieDes">
+          <div class="movieInfo">
+            <h2>{{ item.nm }}</h2>
+            <p>
+              观众评:<span class="movieSc">{{ item.sc }}</span>
+            </p>
+            <p class="star">
+              主演:<span>{{ item.star }}</span>
+            </p>
+            <p>{{ item.showInfo }}</p>
+          </div>
+          <div :class="item.globalReleased ? 'movieBtn' : 'movieBtnTo'">
+            {{ item.globalReleased ? "购票" : "预售" }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </BScroll>
 </template>
 <script>
 import Vuex from "vuex";
@@ -29,11 +31,14 @@ export default {
       MovieList: (state) => state.Movie.NowMovieList,
     }),
   },
+  mounted() {
+    this.$refs.BeingWrapper.getBeingMore();
+  },
 };
 </script>
 <style lang="scss" scoped>
 .movieList {
-  margin-top: 1rem;
+  margin-top: 0.9rem;
 }
 .movieItem {
   padding-left: 0.3rem;

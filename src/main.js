@@ -2,9 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Header from './common/header'
+import Header from '@/common/header'
+import BScroll from "@/common/Bscroll"
 Vue.config.productionTip = false
+
 Vue.component("Header", Header)
+Vue.component("BScroll", BScroll)
+
 Vue.filter("topath", (val, params) => {
   var reg = /w\.h/;
   return val.replace(reg, params)

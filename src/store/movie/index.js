@@ -9,8 +9,7 @@ export default {
     mutations: {
         async getMutationsNowMovie(state) {
             let movieList = await getNowMovie();
-            state.NowMovieList = movieList;
-            console.log(state.NowMovieList)
+            state.NowMovieList = [...state.NowMovieList, ...movieList];
         }
     },
     actions: {

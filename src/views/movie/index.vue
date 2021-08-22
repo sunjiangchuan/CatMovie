@@ -41,7 +41,7 @@ $color: #e54847;
   width: 100%;
   height: 100%;
   padding-top: 1.4rem;
-  padding-bottom: 1.4rem;
+  margin-bottom: 10rem;
   position: absolute;
   overflow: auto;
   .nav {
@@ -56,6 +56,7 @@ $color: #e54847;
     left: 0;
     top: 1.4rem;
     background: white;
+    z-index: 5;
     .city {
       position: absolute;
       left: 0.4rem;
