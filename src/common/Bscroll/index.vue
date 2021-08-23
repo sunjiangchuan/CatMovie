@@ -11,6 +11,8 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       tap: true,
       pullUpLoad: true,
+      // disableTouch: true,
+      // disableMouse: true,
     });
   },
   methods: {
@@ -24,6 +26,12 @@ export default {
       this.scroll.on("pullingUp", () => {
         this.$store.dispatch("Movie/getActionsNowMovie");
       });
+    },
+    updata() {
+      this.scroll.finishPullUp();
+    },
+    getih() {
+      this.scroll.refresh();
     },
   },
 };

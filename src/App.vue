@@ -19,5 +19,6 @@ export default {
 #app,
 .page {
   height: 100%;
+  overflow: auto;
 }
 </style>

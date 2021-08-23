@@ -1,5 +1,7 @@
 <template>
-  <h2>即将上映</h2>
+  <div class="movieTab">
+    <h2>即将上映</h2>
+  </div>
 </template>
 <script>
 export default {

@@ -1,7 +1,7 @@
 <template>
   <div class="city">
     <BScroll ref="bscroll">
-      <div>
+      <div class="citywrap">
         <div class="Hotcity">
           <h2 class="HotCityTitle" ref="HotCityTitle">热门城市</h2>
           <div class="HotcityList">

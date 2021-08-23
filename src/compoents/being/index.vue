@@ -1,6 +1,6 @@
 <template>
   <BScroll ref="BeingWrapper">
-    <div class="movieList">
+    <div class="movieList movieTab">
       <div class="movieItem" v-for="(item, index) in MovieList">
         <div class="moviePic"><img :src="item.img" /></div>
         <div class="movieDes">
@@ -31,8 +31,16 @@ export default {
       MovieList: (state) => state.Movie.NowMovieList,
     }),
   },
+  watch: {
+    MovieList() {
+      this.$refs.BeingWrapper.updata();
+    },
+  },
   mounted() {
     this.$refs.BeingWrapper.getBeingMore();
+  },
+  updated() {
+    this.$refs.BeingWrapper.getih();
   },
 };
 </script>
