@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     handleTo(t) {
-      this.scroll.scrollTo(0, -t, 0);
+      this.scroll.scrollTo(0, -t);
     },
     handleHot(Hot) {
       this.scroll.scrollTo(0, Hot, 0);
@@ -36,7 +36,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style>
 .wrapper {
   height: 100%;
 }

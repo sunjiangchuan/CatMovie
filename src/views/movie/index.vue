@@ -5,7 +5,9 @@
     </Header>
     <section class="container">
       <div class="nav">
-        <router-link class="city" tag="div" to="/city">北京</router-link>
+        <router-link class="city" tag="div" to="/city">{{
+          this.$store.state.City.CityName
+        }}</router-link>
         <aside class="movieToggle">
           <router-link tag="div" to="/movie/being">正在热映</router-link>
           <router-link tag="div" to="/movie/soon">即将热映</router-link>
@@ -60,6 +62,12 @@ $color: #e54847;
     .city {
       position: absolute;
       left: 0.4rem;
+      width: 2.4rem;
+      height: 1rem;
+      line-height: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .search {
       position: absolute;

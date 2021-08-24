@@ -4,16 +4,34 @@ import {
 
 export default {
     state: {
-        HotCity: [],
-        CityList: []
+        HotCity: JSON.parse(window.sessionStorage.getItem("HotCity")) || [],
+        CityList: JSON.parse(window.sessionStorage.getItem("CityList")) || [],
+        CityName: window.sessionStorage.getItem("CityName") || "上海",
+        CityId: window.sessionStorage.getItem("CityId") || 10
+
     },
     mutations: {
+        handleMutationsCitySide(state, params) {
+            state.CityName = params.nm;
+            state.CityId = params.id;
+            window.sessionStorage.setItem("CityName", state.CityName);
+            window.sessionStorage.setItem("CityId", state.CityId);
+        },
+
         getMutationsCityList(state, params) {
-            state.HotCity = [...params.HotCity];
-            state.CityList = [...params.CityList];
+            state.HotCity = params.HotCity;
+            state.CityList = params.CityList;
+
+            window.sessionStorage.setItem("HotCity", JSON.stringify(params.HotCity));
+            window.sessionStorage.setItem("CityList", JSON.stringify(params.CityList));
         }
     },
     actions: {
+        handleActionsCitySide({
+            commit
+        }, params) {
+            commit("handleMutationsCitySide", params);
+        },
         async getActionsCityList({
             commit
         }) {
@@ -29,8 +47,6 @@ export default {
             }
 
             // 城市列表筛选
-
-
             // for (var key in data) {
             //     var firstLetter = data[key].py.slice(0, 1).toUpperCase();
             //     if (toIndex(firstLetter)) {

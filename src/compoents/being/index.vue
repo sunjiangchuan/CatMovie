@@ -1,5 +1,6 @@
 <template>
   <BScroll ref="BeingWrapper">
+    <Loading v-if="isLoading" />
     <div class="movieList movieTab">
       <div class="movieItem" v-for="(item, index) in MovieList">
         <div class="moviePic"><img :src="item.img" /></div>
@@ -26,6 +27,11 @@
 import Vuex from "vuex";
 export default {
   name: "search",
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   computed: {
     ...Vuex.mapState({
       MovieList: (state) => state.Movie.NowMovieList,
@@ -33,6 +39,7 @@ export default {
   },
   watch: {
     MovieList() {
+      this.isLoading = false;
       this.$refs.BeingWrapper.updata();
     },
   },

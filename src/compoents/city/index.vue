@@ -1,11 +1,16 @@
 <template>
   <div class="city">
-    <BScroll ref="bscroll">
+    <Loading v-if="isLoading" />
+    <BScroll ref="bscroll" v-else>
       <div class="citywrap">
         <div class="Hotcity">
           <h2 class="HotCityTitle" ref="HotCityTitle">热门城市</h2>
           <div class="HotcityList">
-            <div class="HotcityItem" v-for="(item, index) in HotCity">
+            <div
+              class="HotcityItem"
+              v-for="(item, index) in HotCity"
+              @touchstart="handleCitySide(item)"
+            >
               {{ item.nm }}
             </div>
           </div>
@@ -18,7 +23,7 @@
                 class="cityItemIndex"
                 v-for="(cityItem, cityIndex) in item.list"
               >
-                {{ cityItem.nm }}
+                <b @touchstart="handleCitySide(cityItem)"> {{ cityItem.nm }}</b>
               </div>
             </div>
           </div>
@@ -39,8 +44,20 @@
 import Vuex from "vuex";
 export default {
   name: "city",
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   created() {
-    this.getCityList();
+    if (
+      !window.sessionStorage.getItem("CityList") &&
+      !window.sessionStorage.getItem("HotCity")
+    ) {
+      this.getCityList();
+    } else {
+      this.isLoading = false;
+    }
   },
   computed: {
     ...Vuex.mapState({
@@ -59,6 +76,15 @@ export default {
     handleHot() {
       var Hot = this.$refs.HotCityTitle.offsetTop;
       this.$refs.bscroll.handleHot(Hot);
+    },
+    handleCitySide(obj) {
+      this.$router.push("/movie");
+      this.$store.dispatch("City/handleActionsCitySide", obj);
+    },
+  },
+  watch: {
+    CityList() {
+      this.isLoading = false;
     },
   },
 };
