@@ -20,11 +20,12 @@ export default {
       this.scroll.scrollTo(0, -t);
     },
     handleHot(Hot) {
-      this.scroll.scrollTo(0, Hot, 0);
+      this.scroll.scrollTo(0, Hot);
     },
     getBeingMore() {
       this.scroll.on("pullingUp", () => {
         this.$store.dispatch("Movie/getActionsNowMovie");
+        this.$store.dispatch("Movie/getActionMoreMovie");
       });
     },
     updata() {

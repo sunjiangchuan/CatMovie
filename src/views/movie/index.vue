@@ -27,8 +27,24 @@
 import Vuex from "vuex";
 export default {
   name: "movie",
-  created() {
-    this.getNowMovie();
+  data() {
+    return {
+      CityId: -1,
+    };
+  },
+  activated() {
+    this.getNowMovie(this.$store.state.City.CityId);
+    // if (
+    //   !window.sessionStorage.getItem("MovieList") ||
+    //   this.CityId != this.$store.state.City.CityId
+    // ) {
+    //   if (this.CityId == -1) {
+    //     return;
+    //   } else {
+    //     this.getNowMovie(this.$store.state.City.CityId);
+    //     this.CityId = this.$store.state.City.CityId;
+    //   }
+    // }
   },
   methods: {
     ...Vuex.mapActions({
@@ -42,8 +58,6 @@ $color: #e54847;
 .container {
   width: 100%;
   height: 100%;
-  padding-top: 1.4rem;
-  margin-bottom: 10rem;
   position: absolute;
   overflow: auto;
   .nav {

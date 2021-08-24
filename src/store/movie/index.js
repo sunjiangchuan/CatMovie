@@ -4,20 +4,31 @@ import {
 
 export default {
     state: {
-        NowMovieList: []
+        NowMovieList: JSON.parse(window.sessionStorage.getItem("MovieList")) || []
     },
     mutations: {
-        async getMutationsNowMovie(state) {
-            let movieList = await getNowMovie();
-            state.NowMovieList = [...state.NowMovieList, ...movieList];
+        getMutationsNowMovie(state, params) {
+            state.NowMovieList = params;
+        },
+        getMutationMoreMovie(state, params) {
+            state.NowMovieList = [...state.NowMovieList, ...params];
         }
     },
     actions: {
-        getActionsNowMovie({
+        async getActionsNowMovie({
+            commit
+        }, params) {
+            let movieList = await getNowMovie(params);
+            commit("getMutationsNowMovie", movieList);
+            window.sessionStorage.setItem("MovieList", JSON.stringify(movieList));
+        },
+        async getActionMoreMovie({
             commit
         }) {
-            commit("getMutationsNowMovie")
-        },
+            let data = await getNowMovie();
+            commit("getMutationMoreMovie", data)
+        }
+
     },
     namespaced: true,
 }
