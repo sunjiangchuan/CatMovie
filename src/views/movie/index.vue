@@ -108,6 +108,6 @@ $color: #e54847;
   }
 }
 .movieTab {
-  padding-top: 0.9rem;
+  padding-top: 2.35rem;
 }
 </style>
