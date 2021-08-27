@@ -1,4 +1,5 @@
 module.exports = {
+    //publicPath: "CatMovie",
     devServer: {
         proxy: {
             "/api": {

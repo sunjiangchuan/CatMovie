@@ -1,7 +1,7 @@
 import {
     getNowMovie
 } from "@/api/api.js";
-
+import utils from "@/utils/common.js"
 export default {
     state: {
         NowMovieList: JSON.parse(window.sessionStorage.getItem("MovieList")) || []
@@ -19,14 +19,14 @@ export default {
             commit
         }, params) {
             let movieList = await getNowMovie(params);
-            commit("getMutationsNowMovie", movieList);
-            window.sessionStorage.setItem("MovieList", JSON.stringify(movieList));
+            commit("getMutationsNowMovie", utils.toImg(movieList));
+            window.sessionStorage.setItem("MovieList", JSON.stringify(utils.toImg(movieList)));
         },
         async getActionMoreMovie({
             commit
         }) {
             let data = await getNowMovie();
-            commit("getMutationMoreMovie", data)
+            commit("getMutationMoreMovie", utils.toImg(data))
         }
 
     },

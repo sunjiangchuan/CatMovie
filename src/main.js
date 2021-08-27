@@ -5,7 +5,21 @@ import store from './store'
 import Header from '@/common/header'
 import BScroll from "@/common/Bscroll"
 import Loading from "@/common/loading"
+import VueLazyload from 'vue-lazyload'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+import VUz from "./library"
+
+Vue.use(VUz)
+Vue.use(MintUI)
 Vue.config.productionTip = false
+
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require("./images/loading.gif"),
+  loading: require("./images/loading.gif"),
+  attempt: 1
+})
 
 Vue.component("Header", Header)
 Vue.component("BScroll", BScroll)

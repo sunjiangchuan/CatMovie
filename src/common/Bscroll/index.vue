@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     handleTo(t) {
-      this.scroll.scrollTo(0, -t);
+      this.scroll.scrollTo(0, -t);  
     },
     handleHot(Hot) {
       this.scroll.scrollTo(0, Hot);

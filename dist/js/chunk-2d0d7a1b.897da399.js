@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d7a1b"],{7848:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",{staticClass:"cinema"},[t("Header",{attrs:{title:"影院"}})],1)},c=[],s={name:"cinema"},i=s,l=t("2877"),r=Object(l["a"])(i,a,c,!1,null,null,null);n["default"]=r.exports}}]);
+//# sourceMappingURL=chunk-2d0d7a1b.897da399.js.map

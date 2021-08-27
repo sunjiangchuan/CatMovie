@@ -3,7 +3,7 @@
     <Loading v-if="isLoading" />
     <div class="movieList movieTab" ref="movieList">
       <div class="movieItem" v-for="(item, index) in MovieList">
-        <div class="moviePic"><img :src="item.img" /></div>
+        <div class="moviePic"><img v-lazy="item.img" /></div>
         <div class="movieDes">
           <div class="movieInfo">
             <h2>{{ item.nm }}</h2>
